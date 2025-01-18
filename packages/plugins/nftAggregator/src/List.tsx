@@ -1,6 +1,7 @@
 import { ModalInfoNFT, TableNFTs, TableWatchList } from '@repo/ui';
 import React from 'react';
 import { useAuthContext } from './Auth';
+import { ModalEvent } from '@repo/ui'
 
 export const List = () => {
   const { walletAddress } = useAuthContext();
@@ -14,6 +15,7 @@ export const List = () => {
 
       <TableNFTs address={walletAddress} />
       <ModalInfoNFT />
+      <ModalEvent/>
     </>
   );
 };
