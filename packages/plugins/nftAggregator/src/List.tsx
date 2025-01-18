@@ -1,4 +1,4 @@
-import { ModalInfoNFT, SearchNFT, TableNFTs, TableWatchList } from '@repo/ui';
+import { ModalInfoNFT, TableNFTs, TableWatchList } from '@repo/ui';
 import React from 'react';
 import { useAuthContext } from './Auth';
 

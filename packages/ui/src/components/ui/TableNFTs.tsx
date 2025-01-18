@@ -1,43 +1,40 @@
+import { get } from 'lodash'
 import React, { useEffect } from 'react'
-import { Button } from './button.tsx'
 import {
   addToWatchlist,
   getDataBest,
   getDataBlur,
   getDataOpenSea,
   getNFTDetail,
-  getPrices,
-  searchCollection,
+  getPrices
 } from '../../apis.ts'
-import { get, cloneDeep } from 'lodash'
-import { SearchNFT } from './SearchNFT.tsx'
 import { useDebounceCallback } from '../../hooks/useDebounceCallback.ts'
-import { useQuery } from '@tanstack/react-query'
+import { SearchNFT } from './SearchNFT.tsx'
+import { Button } from './button.tsx'
 
-export const TableNFTs: React.FC = ({ address }: { address: string }) => {
+export const TableNFTs = ({ address }: { address: string }) => {
   const [collectionsData, setCollectionsData] = React.useState([])
 
   const [collections, setCollections] = React.useState([])
 
   useEffect(() => {
     init()
-
   }, [])
 
   useEffect(() => {
     fetchCollectionsData('')
   }, [collections.length])
 
-  const init=async()=>{
-    const data=await getDataBlur()
-    const dataRes= get(data, 'collections', [])
+  const init = async () => {
+    const data = await getDataBlur()
+    const dataRes = get(data, 'collections', [])
     setCollections(dataRes)
   }
 
-  const fetchCollectionsData = async (key:string) => {
-   const collectionsData = collections.filter((collection) => collection.name.search(key) !== -1)
+  const fetchCollectionsData = async (key: string) => {
+    const collectionsData = collections.filter((collection) => collection.name.search(key) !== -1)
     const enhancedCollections = await Promise.all(
-      collectionsData.slice(0,5).map(async (collection) => {
+      collectionsData.slice(0, 5).map(async (collection) => {
         const openSeaData = await getDataOpenSea(collection.contractAddress)
         const bestListingData = await getDataBest(openSeaData.collection)
 
@@ -77,61 +74,62 @@ export const TableNFTs: React.FC = ({ address }: { address: string }) => {
     await addToWatchlist(address, collection)
   }
 
-  const handleChange=useDebounceCallback(async (e)=>{
+  const handleChange = useDebounceCallback(async (e) => {
     fetchCollectionsData(e.target.value)
-  },500)
+  }, 500)
 
-  return (<div>
-    <div className="mb-4">
-      <SearchNFT onChange={handleChange} />
-    </div>
-  <div className="overflow-x-auto">
-    <table className="table-auto w-full text-sm text-left text-gray-400">
-        <thead className="text-xs uppercase bg-gray-700 text-gray-400">
-          <tr>
-            <th scope="col" className="px-6 py-3">
-              Listed
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Volume/day
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Price Blur/Opensea
-            </th>
-            <th scope="col" className="px-6 py-3"></th>
-            <th scope="col" className="px-6 py-3">
-              Buy now
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {collectionsData.map((collection, index) => (
-            <tr key={index} className="border-b bg-gray-800 border-gray-700 hover:bg-gray-600">
-              <td className="px-6 py-4 font-medium text-white">
-                <div className={'flex items-center gap-4'}>
-                  <img src={collection.imageUrl} alt={collection.name} width={30} height={30} />
-                  <span>{collection.name} </span>
-                </div>
-              </td>
-              <td className="px-6 py-4">
-                {collection.volumeOneDay.amount} {collection.volumeOneDay.unit}
-              </td>
-
-              <td className={'px-6 py-4'}>
-                {get(collection, 'floorPrice.amount', 0)} / {getOpenSeaPrice(collection)}{' '}
-                {get(collection, 'floorPrice.unit', '')}
-              </td>
-              <td className="px-6 py-4">
-                <Button onClick={() => addWatchList(collection)}>Add watchlist</Button>
-              </td>
-              <td className="px-6 py-4">
-                <Button onClick={() => handleBuy(collection)}>Buy now</Button>
-              </td>
+  return (
+    <div>
+      <div className="mb-4">
+        <SearchNFT onChange={handleChange} />
+      </div>
+      <div className="overflow-x-auto">
+        <table className="table-auto w-full text-sm text-left text-gray-400">
+          <thead className="text-xs uppercase bg-gray-700 text-gray-400">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                Listed
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Volume/day
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Price Blur/Opensea
+              </th>
+              <th scope="col" className="px-6 py-3"></th>
+              <th scope="col" className="px-6 py-3">
+                Buy now
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {collectionsData.map((collection, index) => (
+              <tr key={index} className="border-b bg-gray-800 border-gray-700 hover:bg-gray-600">
+                <td className="px-6 py-4 font-medium text-white">
+                  <div className={'flex items-center gap-4'}>
+                    <img src={collection.imageUrl} alt={collection.name} width={30} height={30} />
+                    <span>{collection.name} </span>
+                  </div>
+                </td>
+                <td className="px-6 py-4">
+                  {collection.volumeOneDay.amount} {collection.volumeOneDay.unit}
+                </td>
+
+                <td className={'px-6 py-4'}>
+                  {get(collection, 'floorPrice.amount', 0)} / {getOpenSeaPrice(collection)}{' '}
+                  {get(collection, 'floorPrice.unit', '')}
+                </td>
+                <td className="px-6 py-4">
+                  <Button onClick={() => addWatchList(collection)}>Add watchlist</Button>
+                </td>
+                <td className="px-6 py-4">
+                  <Button onClick={() => handleBuy(collection)}>Buy now</Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

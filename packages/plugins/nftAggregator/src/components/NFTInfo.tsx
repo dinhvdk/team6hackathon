@@ -8,14 +8,8 @@ import React, { useEffect } from 'react';
 import { createWalletClient, custom } from 'viem';
 import { useAuthContext } from '../Auth';
 
-// const collection = {
-//   slug: 'beanzofficial',
-//   contractAddress: '0x306b1ea3ecdf94ab739f1910bbda052ed4a9f949',
-// };
-
 export const NFTInfo: React.FC = ({ nft }: any) => {
   const { walletAddress } = useAuthContext();
-  // const [bestPrice, setBestPrice] = React.useState<any>(null);
 
   const initClient = async () => {
     createClient({
@@ -59,27 +53,6 @@ export const NFTInfo: React.FC = ({ nft }: any) => {
     }
   };
 
-  // const getList = async () => {
-  //   const options = {
-  //     method: 'GET',
-  //     url: `https://blur.p.rapidapi.com/v1/collections/${collection.slug}/prices`,
-  //     params: {
-  //       filters: '{"traits":[],"hasAsks":true}',
-  //     },
-  //     headers: {
-  //       'x-rapidapi-key': 'dd1c66b2damsh6c07ac2305c3252p1ed98cjsn0a13be3dfd7a',
-  //       'x-rapidapi-host': 'blur.p.rapidapi.com',
-  //     },
-  //   };
-
-  //   try {
-  //     const response = await axios.request(options);
-  //     setBestPrice(response.data?.nftPrices?.[0]);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
   useEffect(() => {
     initClient();
   }, []);
@@ -101,7 +74,6 @@ export const NFTInfo: React.FC = ({ nft }: any) => {
             alt="creator avatar"
           />
           <div>
-            {/*<h4 className="text-sm text-gray-500">Created by</h4>*/}
             <h3 className="text-md font-medium text-gray-800">{nft.title}</h3>
           </div>
         </div>
