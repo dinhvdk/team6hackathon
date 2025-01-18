@@ -54,7 +54,7 @@ export const PLUGINS: TPluginData[] = [
     description: 'Data portfolio user',
     image: 'https://coin98.s3.amazonaws.com/ew00D2Rxrc031LBw',
     plugin: NFTAggregator,
-    size: '4x2',
+    size: '12x6',
     status: 'active',
   },
 ]
