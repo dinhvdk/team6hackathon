@@ -7,11 +7,13 @@ export const List = () => {
 
   return (
     <>
-      <h1>Watch List </h1>
+      <h1 className="mb-4">Watch List </h1>
       <TableWatchList address={walletAddress} />
 
-      <h1>Market NFT</h1>
-      <SearchNFT />
+      <h1 className="my-4">Market NFT</h1>
+      <div className="mb-4">
+        <SearchNFT />
+      </div>
       <TableNFTs address={walletAddress} />
       <ModalInfoNFT />
     </>
