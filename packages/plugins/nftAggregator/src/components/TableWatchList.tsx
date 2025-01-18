@@ -46,10 +46,13 @@ export const TableWatchList = ({ address }: { address: string }) => {
       creator: '',
       title: get(detail, 'token.name', ''),
       description: '',
-      price: priceOpenSea < priceBlur ? priceOpenSea : priceBlur,
+      // price:  priceOpenSea < priceBlur ? priceOpenSea : priceBlur,
+      price: priceBlur,
       imageUrl: get(detail, 'token.imageUrl', ''),
       collectionImage: collection.imageUrl,
       traits: get(detail, 'token.traits', []),
+      contractAddress: collection.contractAddress,
+      tokenId,
     };
     window.openModalNft(nft);
     // Your logic to handle the purchase here
