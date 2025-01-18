@@ -11,9 +11,7 @@ export const List = () => {
       <TableWatchList address={walletAddress} />
 
       <h1 className="my-4">Market NFT</h1>
-      <div className="mb-4">
-        <SearchNFT />
-      </div>
+
       <TableNFTs address={walletAddress} />
       <ModalInfoNFT />
     </>

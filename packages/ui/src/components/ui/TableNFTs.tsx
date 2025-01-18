@@ -1,22 +1,46 @@
 import React, { useEffect } from 'react'
 import { Button } from './button.tsx'
-import { addToWatchlist, getDataBest, getDataBlur, getDataOpenSea, getNFTDetail, getPrices } from '../../apis.ts'
+import {
+  addToWatchlist,
+  getDataBest,
+  getDataBlur,
+  getDataOpenSea,
+  getNFTDetail,
+  getPrices,
+  searchCollection,
+} from '../../apis.ts'
 import { get, cloneDeep } from 'lodash'
+import { SearchNFT } from './SearchNFT.tsx'
+import { useDebounceCallback } from '../../hooks/useDebounceCallback.ts'
+import { useQuery } from '@tanstack/react-query'
 
 export const TableNFTs: React.FC = ({ address }: { address: string }) => {
   const [collectionsData, setCollectionsData] = React.useState([])
 
+  const [collections, setCollections] = React.useState([])
+
   useEffect(() => {
-    fetchCollectionsData()
+    init()
+
   }, [])
 
-  const fetchCollectionsData = async () => {
-    const data = await getDataBlur()
-    let collectionsToProcess = get(data, 'collections', []).slice(5, 10)
+  useEffect(() => {
+    fetchCollectionsData('')
+  }, [collections.length])
+
+  const init=async()=>{
+    const data=await getDataBlur()
+    const dataRes= get(data, 'collections', [])
+    setCollections(dataRes)
+  }
+
+  const fetchCollectionsData = async (key:string) => {
+   const collectionsData = collections.filter((collection) => collection.name.search(key) !== -1)
     const enhancedCollections = await Promise.all(
-      collectionsToProcess.map(async (collection) => {
+      collectionsData.slice(0,5).map(async (collection) => {
         const openSeaData = await getDataOpenSea(collection.contractAddress)
         const bestListingData = await getDataBest(openSeaData.collection)
+
         return { ...collection, openSea: { ...bestListingData } }
       }),
     )
@@ -24,7 +48,6 @@ export const TableNFTs: React.FC = ({ address }: { address: string }) => {
   }
 
   const handleBuy = async (collection: any) => {
-    const priceOpenSea = BigInt(get(collection.openSea, 'listings[0].price.current.value', 0))
     const priceBlur = BigInt(get(collection, 'floorPrice.amount', 0) * 10 ** 18)
     const prices = await getPrices(collection.collectionSlug)
     const tokenId = await get(prices, 'nftPrices[0].tokenId', '')
@@ -54,9 +77,16 @@ export const TableNFTs: React.FC = ({ address }: { address: string }) => {
     await addToWatchlist(address, collection)
   }
 
-  return (
-    <div className="overflow-x-auto">
-      <table className="table-auto w-full text-sm text-left text-gray-400">
+  const handleChange=useDebounceCallback(async (e)=>{
+    fetchCollectionsData(e.target.value)
+  },500)
+
+  return (<div>
+    <div className="mb-4">
+      <SearchNFT onChange={handleChange} />
+    </div>
+  <div className="overflow-x-auto">
+    <table className="table-auto w-full text-sm text-left text-gray-400">
         <thead className="text-xs uppercase bg-gray-700 text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-3">
@@ -101,6 +131,7 @@ export const TableNFTs: React.FC = ({ address }: { address: string }) => {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   )
 }
