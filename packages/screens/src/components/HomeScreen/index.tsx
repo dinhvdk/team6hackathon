@@ -23,7 +23,6 @@ const HomeScreen = () => {
       <TableWatchList address={address}/>
 
       <h1>Market NFT</h1>
-      <SearchNFT/>
       <TableNFTs address={address}/>
       <ModalInfoNFT/>
     </section>

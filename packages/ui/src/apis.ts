@@ -51,7 +51,7 @@ export const getDataBlur=async ()=>{
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': 'dd1c66b2damsh6c07ac2305c3252p1ed98cjsn0a13be3dfd7a',
+      'x-rapidapi-key': '70125b8f1fmshb1a9f0ec195d8cap1d78d5jsncac75e4731dc',
       'x-rapidapi-host': 'blur.p.rapidapi.com'
     }
   };
@@ -77,7 +77,7 @@ export const getDataOpenSea=async (addressContract)=>{
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': 'dd1c66b2damsh6c07ac2305c3252p1ed98cjsn0a13be3dfd7a',
+      'x-rapidapi-key': '70125b8f1fmshb1a9f0ec195d8cap1d78d5jsncac75e4731dc',
       'x-rapidapi-host': 'opensea15.p.rapidapi.com'
     }
   };
@@ -108,7 +108,7 @@ const finalUrl = url.replace('{slug}', slug);
 const options = {
   method: 'GET',
   headers: {
-    'x-rapidapi-key': 'dd1c66b2damsh6c07ac2305c3252p1ed98cjsn0a13be3dfd7a',
+    'x-rapidapi-key': '70125b8f1fmshb1a9f0ec195d8cap1d78d5jsncac75e4731dc',
     'x-rapidapi-host': 'opensea15.p.rapidapi.com'
   }
 };
@@ -130,7 +130,7 @@ export const getNFTDetail = async (collectionAddress,tokenId) => {
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': 'dd1c66b2damsh6c07ac2305c3252p1ed98cjsn0a13be3dfd7a',
+      'x-rapidapi-key': '70125b8f1fmshb1a9f0ec195d8cap1d78d5jsncac75e4731dc',
       'x-rapidapi-host': 'blur.p.rapidapi.com',
     },
   };
@@ -158,7 +158,7 @@ export const getPrices = async (collection) => {
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': 'dd1c66b2damsh6c07ac2305c3252p1ed98cjsn0a13be3dfd7a',
+      'x-rapidapi-key': '70125b8f1fmshb1a9f0ec195d8cap1d78d5jsncac75e4731dc',
       'x-rapidapi-host': 'blur.p.rapidapi.com',
     },
   };
@@ -272,6 +272,33 @@ export const removeFromWatchlist = async (address,collectionAddress) => {
 };
 
 
+
+
+export const searchCollection = async (search:string) => {
+  const url = 'https://blur.p.rapidapi.com/v1/search';
+  const headers = {
+    'x-rapidapi-key': '70125b8f1fmshb1a9f0ec195d8cap1d78d5jsncac75e4731dc',
+    'x-rapidapi-host': 'blur.p.rapidapi.com',
+  };
+
+  const params = new URLSearchParams({ query: search });
+
+  try {
+    const response = await fetch(`${url}?${params.toString()}`, {
+      method: 'GET',
+      headers,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('Response data:', data);
+  } catch (error) {
+    console.error('Error fetching search results:', error);
+  }
+};
 
 
 

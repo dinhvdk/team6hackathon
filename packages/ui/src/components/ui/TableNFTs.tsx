@@ -6,13 +6,14 @@ import {
   getDataBlur,
   getDataOpenSea,
   getNFTDetail,
-  getPrices,
+  getPrices, searchCollection,
 } from '../../apis.ts'
 import { get ,cloneDeep} from 'lodash'
+import { SearchNFT } from './SearchNFT.tsx'
 
 export const TableNFTs: React.FC = ({address}:{address:string}) => {
   const [collectionsData, setCollectionsData] = React.useState([]);
-
+  const [search, setSearch] = React.useState('');
   useEffect(() => {
     fetchCollectionsData()
   }, [])
@@ -60,7 +61,14 @@ export const TableNFTs: React.FC = ({address}:{address:string}) => {
     await addToWatchlist(address,collection)
   }
 
-  return (
+  const handleSearch = async (e) => {
+    const data=await searchCollection(e.target.value)
+    console.log(data)
+  }
+
+  return (<>
+    <SearchNFT onChange={handleSearch}/>
+
     <div className="overflow-x-auto">
       <table className="table-auto w-full text-sm text-left text-gray-400">
         <thead className="text-xs uppercase bg-gray-700 text-gray-400">
@@ -106,6 +114,7 @@ export const TableNFTs: React.FC = ({address}:{address:string}) => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

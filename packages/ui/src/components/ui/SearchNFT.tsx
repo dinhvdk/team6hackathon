@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
 
-export const SearchNFT = () => {
-  const [searchText, setSearchText] = useState('');
+export const SearchNFT = ({onChange}) => {
 
   return (
     <div className="relative w-full max-w-md mx-auto">
@@ -26,8 +25,8 @@ export const SearchNFT = () => {
         type="text"
         className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
         placeholder="Search by nft address"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
+        // value={searchText}
+        onChange={onChange}
       />
     </div>
   );
