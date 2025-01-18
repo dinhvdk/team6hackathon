@@ -17,7 +17,10 @@
     "./**/*.tsx",
     "./**/*.svg",
     "../../apps/**/*",
-    "../plugins/nftAggregator/src/components/NFTInfo.tsx"
+    "../plugins/nftAggregator/src/components/NFTInfo.tsx",
+    "../plugins/nftAggregator/src/components/TableNFTs.tsx",
+    "../plugins/nftAggregator/src/components/TableWatchList.tsx",
+    "../plugins/nftAggregator/src/components/apis.ts"
   ],
   "exclude": ["dist", "build", "node_modules"]
 }

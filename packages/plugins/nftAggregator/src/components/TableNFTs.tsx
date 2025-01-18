@@ -1,54 +1,55 @@
-import { get } from 'lodash'
-import React, { useEffect } from 'react'
+import { Button, SearchNFT, useDebounceCallback } from '@repo/ui';
 import {
   addToWatchlist,
   getDataBest,
   getDataBlur,
   getDataOpenSea,
   getNFTDetail,
-  getPrices
-} from '../../apis.ts'
-import { useDebounceCallback } from '../../hooks/useDebounceCallback.ts'
-import { SearchNFT } from './SearchNFT.tsx'
-import { Button } from './button.tsx'
+  getPrices,
+} from './apis';
+import { get } from 'lodash';
+import React, { useEffect } from 'react';
 
 export const TableNFTs = ({ address }: { address: string }) => {
-  const [collectionsData, setCollectionsData] = React.useState([])
-
-  const [collections, setCollections] = React.useState([])
-
-  useEffect(() => {
-    init()
-  }, [])
+  const [collectionsData, setCollectionsData] = React.useState([]);
+  const [collections, setCollections] = React.useState([]);
 
   useEffect(() => {
-    fetchCollectionsData('')
-  }, [collections.length])
+    init();
+  }, []);
+
+  useEffect(() => {
+    fetchCollectionsData('');
+  }, [collections.length]);
 
   const init = async () => {
-    const data = await getDataBlur()
-    const dataRes = get(data, 'collections', [])
-    setCollections(dataRes)
-  }
+    const data = await getDataBlur();
+    const dataRes = get(data, 'collections', []);
+    setCollections(dataRes);
+  };
 
   const fetchCollectionsData = async (key: string) => {
-    const collectionsData = collections.filter((collection) => collection.name.search(key) !== -1)
+    const collectionsData = collections.filter(
+      (collection) => collection.name.search(key) !== -1
+    );
     const enhancedCollections = await Promise.all(
       collectionsData.slice(0, 5).map(async (collection) => {
-        const openSeaData = await getDataOpenSea(collection.contractAddress)
-        const bestListingData = await getDataBest(openSeaData.collection)
+        const openSeaData = await getDataOpenSea(collection.contractAddress);
+        const bestListingData = await getDataBest(openSeaData.collection);
 
-        return { ...collection, openSea: { ...bestListingData } }
-      }),
-    )
-    setCollectionsData(enhancedCollections)
-  }
+        return { ...collection, openSea: { ...bestListingData } };
+      })
+    );
+    setCollectionsData(enhancedCollections);
+  };
 
   const handleBuy = async (collection: any) => {
-    const priceBlur = BigInt(get(collection, 'floorPrice.amount', 0) * 10 ** 18)
-    const prices = await getPrices(collection.collectionSlug)
-    const tokenId = await get(prices, 'nftPrices[0].tokenId', '')
-    const detail = await getNFTDetail(collection.contractAddress, tokenId)
+    const priceBlur = BigInt(
+      get(collection, 'floorPrice.amount', 0) * 10 ** 18
+    );
+    const prices = await getPrices(collection.collectionSlug);
+    const tokenId = await get(prices, 'nftPrices[0].tokenId', '');
+    const detail = await getNFTDetail(collection.contractAddress, tokenId);
     const nft = {
       creator: '',
       title: get(detail, 'token.name', ''),
@@ -60,23 +61,26 @@ export const TableNFTs = ({ address }: { address: string }) => {
       traits: get(detail, 'token.traits', []),
       contractAddress: collection.contractAddress,
       tokenId,
-    }
-    window.openModalNft(nft)
+    };
+    window.openModalNft(nft);
     // Your logic to handle the purchase here
-  }
+  };
 
   const getOpenSeaPrice = (collection) => {
-    return Number(get(collection.openSea, 'listings[0].price.current.value', 0)) / 1e18
-  }
+    return (
+      Number(get(collection.openSea, 'listings[0].price.current.value', 0)) /
+      1e18
+    );
+  };
 
   const addWatchList = async (collection) => {
-    delete collection.openSea
-    await addToWatchlist(address, collection)
-  }
+    delete collection.openSea;
+    await addToWatchlist(address, collection);
+  };
 
   const handleChange = useDebounceCallback(async (e) => {
-    fetchCollectionsData(e.target.value)
-  }, 500)
+    fetchCollectionsData(e.target.value);
+  }, 500);
 
   return (
     <div>
@@ -104,23 +108,35 @@ export const TableNFTs = ({ address }: { address: string }) => {
           </thead>
           <tbody>
             {collectionsData.map((collection, index) => (
-              <tr key={index} className="border-b bg-gray-800 border-gray-700 hover:bg-gray-600">
+              <tr
+                key={index}
+                className="border-b bg-gray-800 border-gray-700 hover:bg-gray-600"
+              >
                 <td className="px-6 py-4 font-medium text-white">
                   <div className={'flex items-center gap-4'}>
-                    <img src={collection.imageUrl} alt={collection.name} width={30} height={30} />
+                    <img
+                      src={collection.imageUrl}
+                      alt={collection.name}
+                      width={30}
+                      height={30}
+                    />
                     <span>{collection.name} </span>
                   </div>
                 </td>
                 <td className="px-6 py-4">
-                  {collection.volumeOneDay.amount} {collection.volumeOneDay.unit}
+                  {collection.volumeOneDay.amount}{' '}
+                  {collection.volumeOneDay.unit}
                 </td>
 
                 <td className={'px-6 py-4'}>
-                  {get(collection, 'floorPrice.amount', 0)} / {getOpenSeaPrice(collection)}{' '}
+                  {get(collection, 'floorPrice.amount', 0)} /{' '}
+                  {getOpenSeaPrice(collection)}{' '}
                   {get(collection, 'floorPrice.unit', '')}
                 </td>
                 <td className="px-6 py-4">
-                  <Button onClick={() => addWatchList(collection)}>Add watchlist</Button>
+                  <Button onClick={() => addWatchList(collection)}>
+                    Add watchlist
+                  </Button>
                 </td>
                 <td className="px-6 py-4">
                   <Button onClick={() => handleBuy(collection)}>Buy now</Button>
@@ -131,5 +147,5 @@ export const TableNFTs = ({ address }: { address: string }) => {
         </table>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -65,6 +65,7 @@
     "@reservoir0x/reservoir-sdk": "^2.4.42",
     "axios": "^1.7.9",
     "viem": "^2.22.9",
+    "lodash": "^4.17.21",
     "web3": "^4.16.0"
   }
 }
