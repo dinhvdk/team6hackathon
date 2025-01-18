@@ -2,6 +2,8 @@ import { PluginA } from '@test/pluga'
 import { PluginB } from '@test/plugb'
 import { PluginFeature } from '@test/plug_feature'
 import { PluginPortfolio } from '@test/plug_portfolio'
+import { NFTAggregator } from '@test/plug_nft_aggregator'
+
 import { TPluginData } from '../types'
 
 export const PLUGINS: TPluginData[] = [
@@ -42,6 +44,16 @@ export const PLUGINS: TPluginData[] = [
     description: 'Data portfolio user',
     image: 'https://coin98.s3.amazonaws.com/ew00D2Rxrc031LBw',
     plugin: PluginPortfolio,
+    size: '4x2',
+    status: 'active',
+  },
+  {
+    id: 'NFTAggregator',
+    name: 'NFTAggregator',
+    url: 'https://snaps.metamask.io/snap/npm/solflare-wallet/solana-snap/',
+    description: 'Data portfolio user',
+    image: 'https://coin98.s3.amazonaws.com/ew00D2Rxrc031LBw',
+    plugin: NFTAggregator,
     size: '4x2',
     status: 'active',
   },

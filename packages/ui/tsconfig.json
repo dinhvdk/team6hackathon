@@ -12,6 +12,12 @@
     }
   },
   "extends": "@repo/typescript-config/react-library.json",
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.svg", "../../apps/**/*"],
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.svg",
+    "../../apps/**/*",
+    "../plugins/nftAggregator/src/components/NFTInfo.tsx"
+  ],
   "exclude": ["dist", "build", "node_modules"]
 }

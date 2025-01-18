@@ -12,6 +12,7 @@
     "@test/plug_feature": "workspace:*",
     "@test/plug_portfolio": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@test/plug_nft_aggregator": "workspace:*",
     "uuid": "^11.0.3"
   },
   "author": "",
