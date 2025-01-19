@@ -45,7 +45,7 @@ export const getDataWatchList = async (address) => {
 export const getDataBlur = async () => {
   const url = 'https://blur.p.rapidapi.com/v1/collections/';
   const params = new URLSearchParams({
-    filters: '{"sort":"VOLUME_ONE_DAY","order":"ASC"}',
+    filters: '{"sort":"VOLUME_ONE_DAY","order":"DESC"}',
   });
 
   const options = {

@@ -247,6 +247,9 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
+      numbro:
+        specifier: ^2.5.0
+        version: 2.5.0
       viem:
         specifier: ^2.22.9
         version: 2.22.9(bufferutil@4.0.8)(typescript@5.7.2)(utf-8-validate@5.0.10)(zod@3.23.8)
@@ -6329,6 +6332,9 @@ packages:
   number-to-bn@1.7.0:
     resolution: {integrity: sha512-wsJ9gfSz1/s4ZsJN01lyonwuxA1tml6X1yBDnfpMglypcBRFZZkus26EdPSlqS5GJfYddVZa22p3VNb3z5m5Ig==}
     engines: {node: '>=6.5.0', npm: '>=3'}
+
+  numbro@2.5.0:
+    resolution: {integrity: sha512-xDcctDimhzko/e+y+Q2/8i3qNC9Svw1QgOkSkQoO0kIPI473tR9QRbo2KP88Ty9p8WbPy+3OpTaAIzehtuHq+A==}
 
   nwsapi@2.2.16:
     resolution: {integrity: sha512-F1I/bimDpj3ncaNDhfyMWuFqmQDBwDB0Fogc2qpL3BWvkQteFD/8BzWuIRl83rq0DXfm8SGt/HFhLXZyljTXcQ==}
@@ -13698,7 +13704,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.0(@typescript-eslint/parser@2.34.0(eslint@6.8.0)(typescript@3.9.10))(eslint-import-resolver-node@0.3.9)(eslint@6.8.0):
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@2.34.0(eslint@6.8.0)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint@6.8.0):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -13741,7 +13747,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 6.8.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@2.34.0(eslint@6.8.0)(typescript@3.9.10))(eslint-import-resolver-node@0.3.9)(eslint@6.8.0)
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@2.34.0(eslint@6.8.0)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint@6.8.0)
       hasown: 2.0.2
       is-core-module: 2.15.1
       is-glob: 4.0.3
@@ -16091,6 +16097,10 @@ snapshots:
     dependencies:
       bn.js: 4.11.6
       strip-hex-prefix: 1.0.0
+
+  numbro@2.5.0:
+    dependencies:
+      bignumber.js: 9.1.2
 
   nwsapi@2.2.16: {}
 

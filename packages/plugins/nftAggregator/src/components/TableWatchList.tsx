@@ -10,6 +10,7 @@ import {
   removeFromWatchlist,
 } from './apis';
 import { Events } from './CheckEvent';
+import { formatNumberBro } from './utils';
 
 export const TableWatchList = ({ address }: { address: string }) => {
   const [collectionsData, setCollectionsData] = React.useState([]);
@@ -80,13 +81,13 @@ export const TableWatchList = ({ address }: { address: string }) => {
           <thead className="text-xs uppercase bg-gray-700 text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Listed
+                NFT
               </th>
               <th scope="col" className="px-6 py-3">
-                Volume/day
+                Supply
               </th>
               <th scope="col" className="px-6 py-3">
-                Price Blur/Opensea
+                Price
               </th>
               <th scope="col" className="px-6 py-3"></th>
               <th scope="col" className="px-6 py-3">
@@ -111,15 +112,20 @@ export const TableWatchList = ({ address }: { address: string }) => {
                     <span>{collection.name} </span>
                   </div>
                 </td>
-                <td className="px-6 py-4">
-                  {collection.volumeOneDay.amount}{' '}
-                  {collection.volumeOneDay.unit}
-                </td>
+                <td className="px-6 py-4">{collection?.totalSupply}</td>
 
                 <td className={'px-6 py-4'}>
-                  {get(collection, 'floorPrice.amount', 0)} /{' '}
-                  {getOpenSeaPrice(collection)}{' '}
-                  {get(collection, 'floorPrice.unit', '')}
+                  <div className="flex flex-col">
+                    <p>
+                      BLUR:{' '}
+                      {formatNumberBro(get(collection, 'floorPrice.amount', 0))}{' '}
+                      {get(collection, 'floorPrice.unit', '')}
+                    </p>
+                    <p>
+                      OPENSEA: {formatNumberBro(getOpenSeaPrice(collection))}{' '}
+                      {get(collection, 'floorPrice.unit', '')}
+                    </p>
+                  </div>
                 </td>
                 <td className={'px-6 py-4'}>
                   <Button onClick={() => removeWatchList(collection)}>

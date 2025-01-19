@@ -50,9 +50,9 @@ export const PLUGINS: TPluginData[] = [
   {
     id: 'NFTAggregator',
     name: 'NFTAggregator',
-    url: 'https://snaps.metamask.io/snap/npm/solflare-wallet/solana-snap/',
+    url: 'https://dagora.xyz/images/logos/logo-simple.svg',
     description: 'Data portfolio user',
-    image: 'https://coin98.s3.amazonaws.com/ew00D2Rxrc031LBw',
+    image: 'https://dagora.xyz/images/logos/logo-simple.svg',
     plugin: NFTAggregator,
     size: '12x6',
     status: 'active',

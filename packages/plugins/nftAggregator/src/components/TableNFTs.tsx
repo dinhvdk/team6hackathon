@@ -1,4 +1,6 @@
 import { Button, SearchNFT, useDebounceCallback } from '@repo/ui';
+import { get } from 'lodash';
+import React, { useEffect } from 'react';
 import {
   addToWatchlist,
   getDataBest,
@@ -7,20 +9,11 @@ import {
   getNFTDetail,
   getPrices,
 } from './apis';
-import { get } from 'lodash';
-import React, { useEffect } from 'react';
+import { formatNumberBro } from './utils';
 
 export const TableNFTs = ({ address }: { address: string }) => {
   const [collectionsData, setCollectionsData] = React.useState([]);
   const [collections, setCollections] = React.useState([]);
-
-  useEffect(() => {
-    init();
-  }, []);
-
-  useEffect(() => {
-    fetchCollectionsData('');
-  }, [collections.length]);
 
   const init = async () => {
     const data = await getDataBlur();
@@ -82,6 +75,14 @@ export const TableNFTs = ({ address }: { address: string }) => {
     fetchCollectionsData(e.target.value);
   }, 500);
 
+  useEffect(() => {
+    init();
+  }, []);
+
+  useEffect(() => {
+    fetchCollectionsData('');
+  }, [collections.length]);
+
   return (
     <div>
       <div className="mb-4">
@@ -92,13 +93,13 @@ export const TableNFTs = ({ address }: { address: string }) => {
           <thead className="text-xs uppercase bg-gray-700 text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Listed
+                NFT
               </th>
               <th scope="col" className="px-6 py-3">
-                Volume/day
+                Supply
               </th>
               <th scope="col" className="px-6 py-3">
-                Price Blur/Opensea
+                Price
               </th>
               <th scope="col" className="px-6 py-3"></th>
               <th scope="col" className="px-6 py-3">
@@ -107,7 +108,7 @@ export const TableNFTs = ({ address }: { address: string }) => {
             </tr>
           </thead>
           <tbody>
-            {collectionsData.map((collection, index) => (
+            {collectionsData.map((collection: any, index) => (
               <tr
                 key={index}
                 className="border-b bg-gray-800 border-gray-700 hover:bg-gray-600"
@@ -123,15 +124,20 @@ export const TableNFTs = ({ address }: { address: string }) => {
                     <span>{collection.name} </span>
                   </div>
                 </td>
-                <td className="px-6 py-4">
-                  {collection.volumeOneDay.amount}{' '}
-                  {collection.volumeOneDay.unit}
-                </td>
+                <td className="px-6 py-4">{collection?.totalSupply}</td>
 
                 <td className={'px-6 py-4'}>
-                  {get(collection, 'floorPrice.amount', 0)} /{' '}
-                  {getOpenSeaPrice(collection)}{' '}
-                  {get(collection, 'floorPrice.unit', '')}
+                  <div className="flex flex-col">
+                    <p>
+                      BLUR:{' '}
+                      {formatNumberBro(get(collection, 'floorPrice.amount', 0))}{' '}
+                      {get(collection, 'floorPrice.unit', '')}
+                    </p>
+                    <p>
+                      OPENSEA: {formatNumberBro(getOpenSeaPrice(collection))}{' '}
+                      {get(collection, 'floorPrice.unit', '')}
+                    </p>
+                  </div>
                 </td>
                 <td className="px-6 py-4">
                   <Button onClick={() => addWatchList(collection)}>
