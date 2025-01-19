@@ -54,7 +54,7 @@ export const PLUGINS: TPluginData[] = [
     description: 'Data portfolio user',
     image: 'https://dagora.xyz/images/logos/logo-simple.svg',
     plugin: NFTAggregator,
-    size: '12x6',
+    size: '8x6',
     status: 'active',
   },
 ]
