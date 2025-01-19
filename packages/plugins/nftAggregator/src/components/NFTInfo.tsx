@@ -25,8 +25,6 @@ export const NFTInfo: React.FC = ({ nft }: any) => {
   };
 
   const buyBlur = async () => {
-    console.log(nft);
-
     try {
       const wallet = createWalletClient({
         account: walletAddress,
@@ -44,12 +42,12 @@ export const NFTInfo: React.FC = ({ nft }: any) => {
           skipBalanceCheck: true,
         },
         wallet,
-        onProgress: (steps: Execute['steps']) => {
-          console.log(steps);
+        onProgress: (steps: Execute['steps'], error) => {
+          console.log(error, steps);
         },
       });
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      alert(`Error buying NFT: Insufficient funds`);
     }
   };
 

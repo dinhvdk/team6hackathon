@@ -40,15 +40,19 @@ export const TableNFTs = ({ address }: { address: string }) => {
     const priceBlur = BigInt(
       get(collection, 'floorPrice.amount', 0) * 10 ** 18
     );
+    const priceOpenSea = BigInt(
+      get(collection.openSea, 'listings[0].price.current.value', 0)
+    );
+
     const prices = await getPrices(collection.collectionSlug);
     const tokenId = await get(prices, 'nftPrices[0].tokenId', '');
     const detail = await getNFTDetail(collection.contractAddress, tokenId);
+
     const nft = {
       creator: '',
       title: get(detail, 'token.name', ''),
       description: '',
-      // price:  priceOpenSea < priceBlur ? priceOpenSea : priceBlur,
-      price: priceBlur,
+      price: priceOpenSea < priceBlur ? priceOpenSea : priceBlur,
       imageUrl: get(detail, 'token.imageUrl', ''),
       collectionImage: collection.imageUrl,
       traits: get(detail, 'token.traits', []),
