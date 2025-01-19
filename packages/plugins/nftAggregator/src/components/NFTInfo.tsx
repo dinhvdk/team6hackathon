@@ -38,12 +38,12 @@ export const NFTInfo: React.FC = ({ nft }: any) => {
             quantity: 1,
           },
         ],
-        options: {
-          skipBalanceCheck: true,
-        },
+        // options: {
+        //   skipBalanceCheck: true,
+        // },
         wallet,
-        onProgress: (steps: Execute['steps'], error) => {
-          console.log(error, steps);
+        onProgress: (steps: Execute['steps']) => {
+          console.log(steps);
         },
       });
     } catch (error: any) {

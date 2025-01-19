@@ -18,7 +18,7 @@ export const SearchNFT = ({ onChange }: any) => {
       <input
         type="text"
         className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
-        placeholder="Search by nft address"
+        placeholder="Search NFT"
         onChange={onChange}
       />
     </div>
