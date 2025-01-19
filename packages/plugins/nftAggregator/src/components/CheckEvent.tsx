@@ -17,7 +17,7 @@ export const Events = ({ children, collectionsData }: any) => {
       url: `https://blur.p.rapidapi.com/v1/collections/${collection.collectionSlug}/executable-bids`,
       params: { filters: '{}' },
       headers: {
-        'x-rapidapi-key': 'dd1c66b2damsh6c07ac2305c3252p1ed98cjsn0a13be3dfd7a',
+        'x-rapidapi-key': 'ea56fadaa1msh60e095bb67b5e63p162818jsn695c3c901a5d',
         'x-rapidapi-host': 'blur.p.rapidapi.com',
       },
     };
@@ -26,7 +26,7 @@ export const Events = ({ children, collectionsData }: any) => {
     //   method: 'GET',
     //   url: `https://opensea15.p.rapidapi.com/api/v2/offers/collection/${collection.collectionSlug}/all`,
     //   headers: {
-    //     'x-rapidapi-key': 'dd1c66b2damsh6c07ac2305c3252p1ed98cjsn0a13be3dfd7a',
+    //     'x-rapidapi-key': 'ea56fadaa1msh60e095bb67b5e63p162818jsn695c3c901a5d',
     //     'x-rapidapi-host': 'opensea15.p.rapidapi.com',
     //   },
     // };

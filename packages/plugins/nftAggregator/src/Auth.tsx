@@ -18,7 +18,7 @@ export const Auth = ({ children }: any) => {
       method: 'POST',
       url: 'https://blur.p.rapidapi.com/auth/challenge',
       headers: {
-        'x-rapidapi-key': 'dd1c66b2damsh6c07ac2305c3252p1ed98cjsn0a13be3dfd7a',
+        'x-rapidapi-key': 'ea56fadaa1msh60e095bb67b5e63p162818jsn695c3c901a5d',
         'x-rapidapi-host': 'blur.p.rapidapi.com',
         'Content-Type': 'application/json',
       },
@@ -39,7 +39,7 @@ export const Auth = ({ children }: any) => {
         url: 'https://blur.p.rapidapi.com/auth/login',
         headers: {
           'x-rapidapi-key':
-            'dd1c66b2damsh6c07ac2305c3252p1ed98cjsn0a13be3dfd7a',
+            'ea56fadaa1msh60e095bb67b5e63p162818jsn695c3c901a5d',
           'x-rapidapi-host': 'blur.p.rapidapi.com',
           'Content-Type': 'application/json',
         },

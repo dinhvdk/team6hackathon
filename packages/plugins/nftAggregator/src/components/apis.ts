@@ -51,7 +51,7 @@ export const getDataBlur = async () => {
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': '70125b8f1fmshb1a9f0ec195d8cap1d78d5jsncac75e4731dc',
+      'x-rapidapi-key': 'ea56fadaa1msh60e095bb67b5e63p162818jsn695c3c901a5d',
       'x-rapidapi-host': 'blur.p.rapidapi.com',
     },
   };
@@ -76,7 +76,7 @@ export const getDataOpenSea = async (addressContract) => {
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': '70125b8f1fmshb1a9f0ec195d8cap1d78d5jsncac75e4731dc',
+      'x-rapidapi-key': 'ea56fadaa1msh60e095bb67b5e63p162818jsn695c3c901a5d',
       'x-rapidapi-host': 'opensea15.p.rapidapi.com',
     },
   };
@@ -107,7 +107,7 @@ export const getDataBest = async (collection: string) => {
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': '70125b8f1fmshb1a9f0ec195d8cap1d78d5jsncac75e4731dc',
+      'x-rapidapi-key': 'ea56fadaa1msh60e095bb67b5e63p162818jsn695c3c901a5d',
       'x-rapidapi-host': 'opensea15.p.rapidapi.com',
     },
   };
@@ -129,7 +129,7 @@ export const getNFTDetail = async (collectionAddress, tokenId) => {
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': '70125b8f1fmshb1a9f0ec195d8cap1d78d5jsncac75e4731dc',
+      'x-rapidapi-key': 'ea56fadaa1msh60e095bb67b5e63p162818jsn695c3c901a5d',
       'x-rapidapi-host': 'blur.p.rapidapi.com',
     },
   };
@@ -157,7 +157,7 @@ export const getPrices = async (collection) => {
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': '70125b8f1fmshb1a9f0ec195d8cap1d78d5jsncac75e4731dc',
+      'x-rapidapi-key': 'ea56fadaa1msh60e095bb67b5e63p162818jsn695c3c901a5d',
       'x-rapidapi-host': 'blur.p.rapidapi.com',
     },
   };
@@ -278,7 +278,7 @@ export const removeFromWatchlist = async (address, collectionAddress) => {
 export const searchCollection = async (search: string) => {
   const url = 'https://blur.p.rapidapi.com/v1/search';
   const headers = {
-    'x-rapidapi-key': '70125b8f1fmshb1a9f0ec195d8cap1d78d5jsncac75e4731dc',
+    'x-rapidapi-key': 'ea56fadaa1msh60e095bb67b5e63p162818jsn695c3c901a5d',
     'x-rapidapi-host': 'blur.p.rapidapi.com',
   };
 
